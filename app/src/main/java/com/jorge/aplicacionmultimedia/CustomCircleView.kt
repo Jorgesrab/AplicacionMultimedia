@@ -33,14 +33,11 @@ class CustomCircleView @JvmOverloads constructor(
         val radius = Math.min(width, height) / 2f
         canvas.drawCircle(centerX, centerY, radius, paint)
 
-        // Guardar el estado del canvas y rotar el texto
-        canvas.save()
-        canvas.rotate(-30f, centerX, centerY) // Rotar el texto 30 grados hacia la izquierda
+
+        // Rotar el canvas entero 30 grados hacia la izquierda
+        canvas.rotate(-30f, centerX, centerY)
 
         // Dibujar el texto "Jorge" inclinado dentro del círculo
         canvas.drawText("Jorge", centerX, centerY + (textPaint.textSize / 3), textPaint)
-
-        // Restaurar el estado original del canvas
-        canvas.restore()
     }
 }
