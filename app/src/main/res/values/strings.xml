@@ -3,4 +3,5 @@
     <string name="gif3_desc">Gift de video</string>
     <string name="gif2_desc">Gift de sonido</string>
     <string name="gif1_desc">gisft de dibujo</string>
+    <string name="play">Boton de sonido\n</string>
 </resources>
