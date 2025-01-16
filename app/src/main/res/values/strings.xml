@@ -4,4 +4,7 @@
     <string name="gif2_desc">Gift de sonido</string>
     <string name="gif1_desc">gisft de dibujo</string>
     <string name="play">Boton de sonido\n</string>
+    <string name="record">Boton de grabar\n</string>
+    <string name="play_pause">Boton pause\n</string>
+    <string name="video_title">Titulo del video\n</string>
 </resources>

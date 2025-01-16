@@ -15,6 +15,7 @@
 
         <activity android:name=".DrawingActivity" />
         <activity android:name=".SoundActivity" />
+        <activity android:name=".VideoActivity" />
 
         <activity
             android:name=".MainActivity"
