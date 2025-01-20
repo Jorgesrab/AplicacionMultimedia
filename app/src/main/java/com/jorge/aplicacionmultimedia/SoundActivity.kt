@@ -94,60 +94,71 @@ class SoundActivity : AppCompatActivity() {
     }
 
     private fun playSound(soundResId: Int, seekBarProgress: SeekBar, onPrepared: (MediaPlayer) -> Unit) {
+        // Crea un MediaPlayer a partir del recurso de sonido proporcionado
         val mediaPlayer = MediaPlayer.create(this, soundResId)
+
+        // Configura un listener para cuando el MediaPlayer esté preparado
         mediaPlayer.setOnPreparedListener {
-            seekBarProgress.max = mediaPlayer.duration
-            mediaPlayer.start()
-            startProgressUpdater(mediaPlayer, seekBarProgress)
-            onPrepared(mediaPlayer)
+            seekBarProgress.max = mediaPlayer.duration // Establece la duración máxima de la SeekBar
+            mediaPlayer.start() // Inicia la reproducción de audio
+            startProgressUpdater(mediaPlayer, seekBarProgress) // Inicia la actualización de la barra de progreso
+            onPrepared(mediaPlayer) // Llama a la función proporcionada como parámetro
         }
 
+        // Configura un listener para cuando la reproducción haya finalizado
         mediaPlayer.setOnCompletionListener {
-            stopProgressUpdater()
-            seekBarProgress.progress = 0
+            stopProgressUpdater() // Detiene la actualización de la barra de progreso
+            seekBarProgress.progress = 0 // Reinicia la barra de progreso a 0
         }
     }
 
+    // Pausa la reproducción del audio si el MediaPlayer no es nulo
     private fun pauseSound(mediaPlayer: MediaPlayer?) {
         mediaPlayer?.pause()
     }
 
     private fun stopSound(mediaPlayer: MediaPlayer?, button: ImageButton) {
-        mediaPlayer?.pause()
-        mediaPlayer?.seekTo(0)
-        Glide.with(this).asGif().load(R.raw.play).into(button)
-        stopProgressUpdater()
+        mediaPlayer?.pause() // Pausa la reproducción
+        mediaPlayer?.seekTo(0) // Reinicia la reproducción al inicio
+        Glide.with(this).asGif().load(R.raw.play).into(button) // Cambia el icono del botón a "play"
+        stopProgressUpdater() // Detiene la actualización de la barra de progreso
     }
 
     private fun startProgressUpdater(mediaPlayer: MediaPlayer, seekBarProgress: SeekBar) {
-        progressJob?.cancel() // Cancelar cualquier coroutine previa
+        progressJob?.cancel() // Cancela cualquier coroutine anterior para evitar múltiples ejecuciones
+
+        // Inicia una nueva coroutine para actualizar la barra de progreso mientras el audio se reproduce
         progressJob = CoroutineScope(Dispatchers.Main).launch {
             while (mediaPlayer.isPlaying) {
-                seekBarProgress.progress = mediaPlayer.currentPosition
-                delay(500) // Esperar 500 ms antes de actualizar nuevamente
+                seekBarProgress.progress = mediaPlayer.currentPosition // Actualiza la barra de progreso con la posición actual
+                delay(500) // Espera 500 ms antes de actualizar nuevamente
             }
         }
 
+        // Maneja los cambios en la barra de progreso cuando el usuario la manipula manualmente
         seekBarProgress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
+                if (fromUser) { // Si el usuario mueve la barra, actualiza la posición del audio
                     mediaPlayer.seekTo(progress)
                 }
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {} // No se hace nada al comenzar a tocar la barra
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}  // No se hace nada al dejar de tocar la barra
         })
     }
 
+    // Detiene la coroutine que actualiza la barra de progreso
     private fun stopProgressUpdater() {
-        progressJob?.cancel() // Cancelar la coroutine de progreso
+        progressJob?.cancel()
     }
 
+    // Se ejecuta cuando la actividad es destruida
     override fun onDestroy() {
         super.onDestroy()
-        mediaPlayer1?.release()
-        mediaPlayer2?.release()
-        stopProgressUpdater()
+        mediaPlayer1?.release() // Libera los recursos del primer MediaPlayer
+        mediaPlayer2?.release() // Libera los recursos del segundo MediaPlayer
+        stopProgressUpdater() // Detiene la actualización de la barra de progreso
     }
+
 }

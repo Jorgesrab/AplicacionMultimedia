@@ -9,20 +9,14 @@
     android:background="@color/background_color"
     tools:context=".MainActivity">
 
-    <!-- Título de la aplicación -->
 
-    <!-- Primer GIF con título -->
-
-    <!-- Segundo GIF con título -->
-
-    <!-- Tercer GIF con título -->
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Aplicación Multimedia"
+        android:text="@string/aplicaci_n_multimedia"
         android:textColor="@color/title_color"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -55,7 +49,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/text_background"
             android:padding="8dp"
-            android:text="Vídeo"
+            android:text="@string/v_deo"
             android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -86,7 +80,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/text_background"
             android:padding="8dp"
-            android:text="Dibujo"
+            android:text="@string/dibujo"
             android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -117,7 +111,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/text_background"
             android:padding="8dp"
-            android:text="Sonido"
+            android:text="@string/sonido"
             android:textColor="@color/text_color"
             android:textSize="18sp"
             android:textStyle="bold" />

@@ -7,4 +7,11 @@
     <string name="record">Boton de grabar\n</string>
     <string name="play_pause">Boton pause\n</string>
     <string name="video_title">Titulo del video\n</string>
+    <string name="grupo_de_figuras_animado">Grupo de figuras animado</string>
+    <string name="esfera_con_el_nombre">Esfera con el nombre</string>
+    <string name="dibujos">Dibujos</string>
+    <string name="aplicaci_n_multimedia">Aplicación Multimedia</string>
+    <string name="v_deo">Vídeo</string>
+    <string name="dibujo">Dibujo</string>
+    <string name="sonido">Sonido</string>
 </resources>
